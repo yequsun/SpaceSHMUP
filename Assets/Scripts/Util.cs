@@ -176,6 +176,17 @@ public class Util : MonoBehaviour {
 		return FindTaggedParent (t.gameObject);
 	}
 
+	static public Material[] GetAllMaterials(GameObject go){
+		List<Material> mats = new List<Material>();
+		if (go.renderer != null) {
+			mats.Add(go.renderer.material);
+		}
+		foreach (Transform t in go.transform){
+			mats.AddRange(GetAllMaterials(t.gameObject));
+		}
+		return mats.ToArray();
+	}
+
 
 	// Use this for initialization
 	void Start () {
